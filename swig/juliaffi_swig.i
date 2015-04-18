@@ -8,9 +8,8 @@
 %include "juliaffi_swig_doc.i"
 
 %{
-#include "juliaffi/jlblock.h"
+#include "juliaffi/jlblock_ff.h"
 %}
 
-
-%include "juliaffi/jlblock.h"
-GR_SWIG_BLOCK_MAGIC2(juliaffi, jlblock);
+%include "juliaffi/jlblock_ff.h"
+GR_SWIG_BLOCK_MAGIC2(juliaffi, jlblock_ff);

@@ -23,56 +23,55 @@
 #endif
 
 #include <gnuradio/io_signature.h>
-#include "jlblock_impl.h"
+#include "jlblock_ff_impl.h"
 
 namespace gr {
   namespace juliaffi {
 
-    jlblock::sptr
-    jlblock::make()
+    jlblock_ff::sptr
+    jlblock_ff::make()
     {
       return gnuradio::get_initial_sptr
-        (new jlblock_impl());
+        (new jlblock_ff_impl());
     }
 
     /*
      * The private constructor
      */
-    jlblock_impl::jlblock_impl()
-      : gr::block("jlblock",
+    jlblock_ff_impl::jlblock_ff_impl()
+      : gr::block("jlblock_ff",
               gr::io_signature::make(1, 1, sizeof(float)),
               gr::io_signature::make(1, 1, sizeof(float)))
-    {
-        printf(__FUNCTION__);
-    }
+    {}
 
     /*
      * Our virtual destructor.
      */
-    jlblock_impl::~jlblock_impl()
+    jlblock_ff_impl::~jlblock_ff_impl()
     {
     }
 
     void
-    jlblock_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
+    jlblock_ff_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
     {
         ninput_items_required[0] = noutput_items;
     }
 
     int
-    jlblock_impl::general_work (int noutput_items,
+    jlblock_ff_impl::general_work (int noutput_items,
                        gr_vector_int &ninput_items,
                        gr_vector_const_void_star &input_items,
                        gr_vector_void_star &output_items)
     {
         const float *in = (const float *) input_items[0];
-        float *out      = (float *) output_items[0];
+        float *out = (float *) output_items[0];
 
-        for (int i = 0; i < noutput_items; i++){
+        for (int i = 0; i < noutput_items; i++ ){
             out[i] = in[i];
         }
-        
 
+        // Tell runtime system how many input items we consumed on
+        // each input stream.
         consume_each (noutput_items);
 
         // Tell runtime system how many output items we produced.

@@ -29,10 +29,8 @@ include_directories(
 link_directories(
     ${Boost_LIBRARY_DIRS}
 )
-
 list(APPEND juliaffi_sources
-    jlblock_impl.cc
-)
+    jlblock_ff_impl.cc )
 
 set(juliaffi_sources "${juliaffi_sources}" PARENT_SCOPE)
 if(NOT juliaffi_sources)

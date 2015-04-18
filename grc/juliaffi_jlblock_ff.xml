@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <block>
-  <name>jlblock</name>
-  <key>juliaffi_jlblock</key>
+  <name>jlblock_ff</name>
+  <key>juliaffi_jlblock_ff</key>
   <category>juliaffi</category>
   <import>import juliaffi</import>
-  <make>juliaffi.jlblock()</make>
+  <make>juliaffi.jlblock_ff()</make>
   <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:
        * name

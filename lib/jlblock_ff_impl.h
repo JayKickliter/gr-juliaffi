@@ -18,22 +18,22 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_JULIAFFI_JLBLOCK_IMPL_H
-#define INCLUDED_JULIAFFI_JLBLOCK_IMPL_H
+#ifndef INCLUDED_JULIAFFI_JLBLOCK_FF_IMPL_H
+#define INCLUDED_JULIAFFI_JLBLOCK_FF_IMPL_H
 
-#include <juliaffi/jlblock.h>
+#include <juliaffi/jlblock_ff.h>
 
 namespace gr {
   namespace juliaffi {
 
-    class jlblock_impl : public jlblock
+    class jlblock_ff_impl : public jlblock_ff
     {
      private:
       // Nothing to declare in this block.
 
      public:
-      jlblock_impl();
-      ~jlblock_impl();
+      jlblock_ff_impl();
+      ~jlblock_ff_impl();
 
       // Where all the action really happens
       void forecast (int noutput_items, gr_vector_int &ninput_items_required);
@@ -47,5 +47,5 @@ namespace gr {
   } // namespace juliaffi
 } // namespace gr
 
-#endif /* INCLUDED_JULIAFFI_JLBLOCK_IMPL_H */
+#endif /* INCLUDED_JULIAFFI_JLBLOCK_FF_IMPL_H */
 

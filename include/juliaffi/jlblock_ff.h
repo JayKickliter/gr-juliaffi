@@ -19,8 +19,8 @@
  */
 
 
-#ifndef INCLUDED_JULIAFFI_JLBLOCK_H
-#define INCLUDED_JULIAFFI_JLBLOCK_H
+#ifndef INCLUDED_JULIAFFI_JLBLOCK_FF_H
+#define INCLUDED_JULIAFFI_JLBLOCK_FF_H
 
 #include <juliaffi/api.h>
 #include <gnuradio/block.h>
@@ -33,17 +33,17 @@ namespace gr {
      * \ingroup juliaffi
      *
      */
-    class JULIAFFI_API jlblock : virtual public gr::block
+    class JULIAFFI_API jlblock_ff : virtual public gr::block
     {
      public:
-      typedef boost::shared_ptr<jlblock> sptr;
+      typedef boost::shared_ptr<jlblock_ff> sptr;
 
       /*!
-       * \brief Return a shared_ptr to a new instance of juliaffi::jlblock.
+       * \brief Return a shared_ptr to a new instance of juliaffi::jlblock_ff.
        *
-       * To avoid accidental use of raw pointers, juliaffi::jlblock's
+       * To avoid accidental use of raw pointers, juliaffi::jlblock_ff's
        * constructor is in a private implementation
-       * class. juliaffi::jlblock::make is the public interface for
+       * class. juliaffi::jlblock_ff::make is the public interface for
        * creating new instances.
        */
       static sptr make();
@@ -52,5 +52,5 @@ namespace gr {
   } // namespace juliaffi
 } // namespace gr
 
-#endif /* INCLUDED_JULIAFFI_JLBLOCK_H */
+#endif /* INCLUDED_JULIAFFI_JLBLOCK_FF_H */
 
