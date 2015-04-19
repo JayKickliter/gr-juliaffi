@@ -32,7 +32,8 @@ link_directories(
     ${JULIA_LIBRARY_DIR}
 )
 list(APPEND juliaffi_sources
-    jlblock_ff_impl.cc )
+    jlblock_ff_impl.cc
+    juliablock_ff_impl.cc )
 
 add_definitions(-DSYSIMG_JL=${JULIA_SYSIMG})
 

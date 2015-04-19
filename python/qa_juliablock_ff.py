@@ -24,7 +24,7 @@ from gnuradio import blocks
 import juliaffi_swig as juliaffi
 # from juliaffi import juliaffi_swig as juliaffi
 
-class qa_jlblock_ff (gr_unittest.TestCase):
+class qa_juliablock_ff (gr_unittest.TestCase):
 
     def setUp (self):
         self.tb = gr.top_block ()
@@ -32,11 +32,11 @@ class qa_jlblock_ff (gr_unittest.TestCase):
     def tearDown (self):
         self.tb = None
 
-    def test_001_jlblock_ff (self):
+    def test_001_t (self):
         src_data        = (-3, 4, -5.5, 2, 3)
         expected_result = (3, -4, 5.5, -2, -3)
         src             = blocks.vector_source_f(src_data)
-        sqr             = juliaffi.jlblock_ff()
+        sqr             = juliaffi.juliablock_ff("/Users/jay/repos/gr-juliaffi/examples/negate_example.jl")
         dst             = blocks.vector_sink_f()
         self.tb.connect(src, sqr)
         self.tb.connect(sqr, dst)
@@ -44,5 +44,7 @@ class qa_jlblock_ff (gr_unittest.TestCase):
         result_data = dst.data()
         self.assertFloatTuplesAlmostEqual(expected_result, result_data, 6)
 
+
+
 if __name__ == '__main__':
-    gr_unittest.run(qa_jlblock_ff, "qa_jlblock_ff.xml")
+    gr_unittest.run(qa_juliablock_ff, "qa_juliablock_ff.xml")

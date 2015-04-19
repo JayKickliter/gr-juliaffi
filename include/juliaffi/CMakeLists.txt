@@ -22,5 +22,6 @@
 ########################################################################
 install(FILES
     api.h
-    jlblock_ff.h DESTINATION include/juliaffi
+    jlblock_ff.h
+    juliablock_ff.h DESTINATION include/juliaffi
 )
