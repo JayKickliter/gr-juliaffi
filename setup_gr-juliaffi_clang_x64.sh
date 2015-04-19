@@ -30,6 +30,9 @@ cd build
 # export OBJCFLAGS='-pipe -Os -arch x86_64'
 # export OBJCXX='/usr/bin/clang++'
 # export OBJCXXFLAGS='-pipe -Os -arch x86_64 -stdlib=libc++'
+# -DCMAKE_BUILD_WITH_INSTALL_RPATH=ON \
+# -DCMAKE_INSTALL_RPATH=/opt/local/lib \
+# -DCMAKE_INSTALL_NAME_DIR=/opt/local/lib \
 
 cmake \
 -DCMAKE_CXX_COMPILER="/usr/bin/clang++" \
@@ -37,14 +40,12 @@ cmake \
 -DCMAKE_VERBOSE_MAKEFILE=ON \
 -DCMAKE_COLOR_MAKEFILE=ON \
 -DCMAKE_BUILD_TYPE=Release \
--DCMAKE_BUILD_WITH_INSTALL_RPATH=ON \
--DCMAKE_INSTALL_RPATH=/opt/local/lib \
--DCMAKE_INSTALL_NAME_DIR=/opt/local/lib \
 -DCMAKE_SYSTEM_PREFIX_PATH="/opt/local;/usr" \
+-DCMAKE_INSTALL_RPATH_USE_LINK_PATH=TRUE \
 -DCMAKE_MODULE_PATH=/opt/local/share/cmake/Modules \
 -DCMAKE_FIND_FRAMEWORK=LAST \
 -Wno-dev \
--DPYTHON_EXECUTABLE=/opt/local/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7 \
+-DPYTHON_EXECUTABLE=/opt/local/bin/python2.7 \
 -DPYTHON_INCLUDE_DIR=/opt/local/Library/Frameworks/Python.framework/Versions/2.7/Headers \
 -DPYTHON_LIBRARY=/opt/local/Library/Frameworks/Python.framework/Versions/2.7/Python \
 -DGR_PYTHON_DIR=/opt/local/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages \
