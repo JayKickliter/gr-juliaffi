@@ -17,6 +17,5 @@
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
 install(FILES
-    juliaffi_jlblock_ff.xml
     juliaffi_juliablock_ff.xml DESTINATION share/gnuradio/grc/blocks
 )

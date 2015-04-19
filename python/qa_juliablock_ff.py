@@ -19,10 +19,15 @@
 # Boston, MA 02110-1301, USA.
 # 
 
+import os
 from gnuradio import gr, gr_unittest
 from gnuradio import blocks
-import juliaffi_swig as juliaffi
+
+# If this gnuradio module has been installed,
+#   uncomment the following line to test from the installed location
 # from juliaffi import juliaffi_swig as juliaffi
+#   else uncomment this following line so that 'make test' can run
+import juliaffi_swig as juliaffi
 
 class qa_juliablock_ff (gr_unittest.TestCase):
 
@@ -36,7 +41,9 @@ class qa_juliablock_ff (gr_unittest.TestCase):
         src_data        = (-3, 4, -5.5, 2, 3)
         expected_result = (3, -4, 5.5, -2, -3)
         src             = blocks.vector_source_f(src_data)
-        sqr             = juliaffi.juliablock_ff("/Users/jay/repos/gr-juliaffi/examples/negate_example.jl")
+        julia_file      = os.path.join(os.path.dirname(__file__), '../examples/negate_example.jl')
+        print julia_file
+        sqr             = juliaffi.juliablock_ff('/Users/jay/repos/gr-juliaffi/examples/negate_example.jl')
         dst             = blocks.vector_sink_f()
         self.tb.connect(src, sqr)
         self.tb.connect(sqr, dst)
