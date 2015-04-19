@@ -42,7 +42,8 @@ namespace gr {
       : gr::block("jlblock_ff",
               gr::io_signature::make(1, 1, sizeof(float)),
               gr::io_signature::make(1, 1, sizeof(float)))
-    {}
+    {
+    }
 
     /*
      * Our virtual destructor.
@@ -67,7 +68,7 @@ namespace gr {
         float *out = (float *) output_items[0];
 
         for (int i = 0; i < noutput_items; i++ ){
-            out[i] = in[i];
+            out[i] = -in[i];
         }
 
         // Tell runtime system how many input items we consumed on

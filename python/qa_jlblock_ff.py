@@ -33,7 +33,7 @@ class qa_jlblock_ff (gr_unittest.TestCase):
 
     def test_001_jlblock_ff (self):
         src_data        = (-3, 4, -5.5, 2, 3)
-        expected_result = (-3, 4, -5.5, 2, 3)
+        expected_result = (3, -4, 5.5, -2, -3)
         src             = blocks.vector_source_f(src_data)
         sqr             = juliaffi.jlblock_ff()
         dst             = blocks.vector_sink_f()
