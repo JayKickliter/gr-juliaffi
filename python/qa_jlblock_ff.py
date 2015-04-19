@@ -21,8 +21,8 @@
 
 from gnuradio import gr, gr_unittest
 from gnuradio import blocks
-import juliaffi_swig as juliaffi
-# from juliaffi import juliaffi_swig as juliaffi
+# import juliaffi_swig as juliaffi
+from juliaffi import juliaffi_swig as juliaffi
 
 class qa_jlblock_ff (gr_unittest.TestCase):
 

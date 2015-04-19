@@ -1,17 +1,17 @@
 /* -*- c++ -*- */
-/* 
+/*
  * Copyright 2015 <+YOU OR YOUR COMPANY+>.
- * 
+ *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3, or (at your option)
  * any later version.
- * 
+ *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this software; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street,
@@ -43,8 +43,8 @@ namespace gr {
               gr::io_signature::make(1, 1, sizeof(float)),
               gr::io_signature::make(1, 1, sizeof(float)))
     {
-        jl_init("/opt/local/bin");
-        // jl_eval_string("negate(x) = -x");
+        jl_init("/usr/local/bin");
+        jl_eval_string("negate(x) = -x");
     }
 
     /*
@@ -69,20 +69,26 @@ namespace gr {
         const float *in = (const float *) input_items[0];
         float *out      = (float *) output_items[0];
 
-        // jl_function_t *func = jl_get_function(jl_base_module, "negate");
-        // jl_value_t *argument;
-        // jl_value_t *ret;
-        //
-        // for (int i = 0; i < noutput_items; i++ ){
-        //     ret = jl_call1(func, jl_box_float32(in[i]));
-        //     if (jl_is_float32(ret)) {
-        //         out[i] = jl_unbox_float32(ret);
-        //     }
-        // }
-        
+        jl_function_t *negate = jl_get_function(jl_main_module, "negate");
+        jl_value_t    *argument;
+        jl_value_t    *ret;
+
         for (int i = 0; i < noutput_items; i++ ){
-            out[i] = -in[i];
+
+            jl_value_t* argument = jl_box_float32(in[i]);
+            jl_value_t* ret      = jl_call1(negate, argument);
+
+            if (jl_is_float32(ret)) {
+                out[i] = jl_unbox_float32(ret);
+            }
+
+            if (jl_exception_occurred())
+                printf("%s \n", jl_typeof_str(jl_exception_occurred()));
         }
+
+        // for (int i = 0; i < noutput_items; i++ ){
+        //     out[i] = -in[i];
+        // }
 
         // Tell runtime system how many input items we consumed on
         // each input stream.

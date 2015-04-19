@@ -24,17 +24,17 @@ include(GrPlatform) #define LIB_SUFFIX
 
 include_directories(
     ${Boost_INCLUDE_DIR}
-    ${Julia_INCLUDE_DIRS}
+    ${JULIA_INCLUDE_DIRS}
 )
 
 link_directories(
     ${Boost_LIBRARY_DIRS}
-    ${Julia_LIBRARY_DIRS}
+    ${JULIA_LIBRARY_DIR}
 )
 list(APPEND juliaffi_sources
     jlblock_ff_impl.cc )
 
-add_definitions(-DSYSIMG_JL=${Julia_SYSIMG})
+add_definitions(-DSYSIMG_JL=${JULIA_SYSIMG})
 
 set(juliaffi_sources "${juliaffi_sources}" PARENT_SCOPE)
 if(NOT juliaffi_sources)
@@ -48,7 +48,7 @@ target_link_libraries(
     gnuradio-juliaffi
     ${Boost_LIBRARIES}
     ${GNURADIO_ALL_LIBRARIES}
-    ${Julia_LIBRARIES}
+    ${JULIA_LIBRARY}
 )
 
 set_target_properties(gnuradio-juliaffi PROPERTIES DEFINE_SYMBOL "gnuradio_juliaffi_EXPORTS")

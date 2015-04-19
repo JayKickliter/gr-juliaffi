@@ -122,6 +122,10 @@ endif()
 ########################################################################
 find_package(Julia REQUIRED)
 
+if(NOT JULIA_FOUND)
+    message(FATAL_ERROR "libjulia required to compile juliaffi")
+endif()
+
 ########################################################################
 # Setup doxygen option
 ########################################################################
@@ -142,14 +146,14 @@ include_directories(
     ${Boost_INCLUDE_DIRS}
     ${CPPUNIT_INCLUDE_DIRS}
     ${GNURADIO_ALL_INCLUDE_DIRS}
-    ${Julia_INCLUDE_DIRS}
+    ${JULIA_INCLUDE_DIRS}
 )
 
 link_directories(
     ${Boost_LIBRARY_DIRS}
     ${CPPUNIT_LIBRARY_DIRS}
     ${GNURADIO_RUNTIME_LIBRARY_DIRS}
-    ${Julia_LIBRARY_DIRS}
+    ${JULIA_LIBRARY_DIR}
 )
 
 # Set component parameters
