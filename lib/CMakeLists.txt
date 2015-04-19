@@ -34,6 +34,8 @@ link_directories(
 list(APPEND juliaffi_sources
     jlblock_ff_impl.cc )
 
+add_definitions(-DSYSIMG_JL=${Julia_SYSIMG})
+
 set(juliaffi_sources "${juliaffi_sources}" PARENT_SCOPE)
 if(NOT juliaffi_sources)
 	MESSAGE(STATUS "No C++ sources... skipping lib/")

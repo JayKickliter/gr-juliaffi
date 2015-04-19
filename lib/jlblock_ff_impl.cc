@@ -43,6 +43,8 @@ namespace gr {
               gr::io_signature::make(1, 1, sizeof(float)),
               gr::io_signature::make(1, 1, sizeof(float)))
     {
+        jl_init("/opt/local/bin");
+        jl_eval_string("negate(x) = -x");
     }
 
     /*
@@ -67,8 +69,15 @@ namespace gr {
         const float *in = (const float *) input_items[0];
         float *out = (float *) output_items[0];
 
+        jl_function_t *func = jl_get_function(jl_base_module, "negate");
+        jl_value_t *argument;
+        jl_value_t *ret;
+
         for (int i = 0; i < noutput_items; i++ ){
-            out[i] = -in[i];
+            ret = jl_call1(func, jl_box_float32(in[i]));
+            if (jl_is_float32(ret)) {
+                out[i] = jl_unbox_float32(ret);
+            }
         }
 
         // Tell runtime system how many input items we consumed on

@@ -34,6 +34,19 @@ if(NOT Julia_FOUND)
         endif()
 
         #
+        # sysimg.jl
+        #
+        execute_process(
+	        COMMAND ${Julia_EXECUTABLE} -E "joinpath(match(r\"(.*)(bin)\",JULIA_HOME).captures[1],\"share\",\"julia\",\"base\",\"sysimg.jl\")"
+            OUTPUT_VARIABLE Julia_SYSIMG
+            RESULT_VARIABLE RESULT
+        )
+        if(RESULT EQUAL 0)
+            set(Julia_SYSIMG ${Julia_SYSIMG}
+                CACHE PATH "Julia sysimg location")            
+        endif()
+        
+        #
         # Julia library location
         #
         execute_process(
@@ -68,7 +81,7 @@ if(NOT Julia_FOUND)
     include(FindPackageHandleStandardArgs)
     find_package_handle_standard_args(
         Julia
-        REQUIRED_VARS   Julia_INCLUDE_DIRS Julia_LIBRARY_DIRS Julia_LIBRARIES
+        REQUIRED_VARS   Julia_INCLUDE_DIRS Julia_LIBRARY_DIRS Julia_LIBRARIES Julia_SYSIMG
         VERSION_VAR     Julia_VERSION_STRING
         FAIL_MESSAGE    "Julia not found"
     )
