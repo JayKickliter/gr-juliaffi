@@ -177,7 +177,7 @@ add_subdirectory(swig)
 add_subdirectory(python)
 add_subdirectory(grc)
 add_subdirectory(apps)
-add_subdirectory(docs)
+# add_subdirectory(docs)
 
 ########################################################################
 # Install cmake search helper for this library
