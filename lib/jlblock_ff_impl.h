@@ -22,6 +22,7 @@
 #define INCLUDED_JULIAFFI_JLBLOCK_FF_IMPL_H
 
 #include <juliaffi/jlblock_ff.h>
+#include <julia.h>
 
 namespace gr {
   namespace juliaffi {

@@ -46,7 +46,7 @@ target_link_libraries(
     gnuradio-juliaffi
     ${Boost_LIBRARIES}
     ${GNURADIO_ALL_LIBRARIES}
-    # ${Julia_LIBRARIES}
+    ${Julia_LIBRARIES}
 )
 
 set_target_properties(gnuradio-juliaffi PROPERTIES DEFINE_SYMBOL "gnuradio_juliaffi_EXPORTS")
