@@ -21,13 +21,15 @@ if(NOT Julia_FOUND)
         # Julia includes
         #
         execute_process(
-            COMMAND ${Julia_EXECUTABLE} -E "joinpath(match(r\"(.*)(bin)\",JULIA_HOME).captures[1],\"include\",\"julia\")"
-            OUTPUT_VARIABLE Julia_INCLUDE_DIR
+	        COMMAND ${Julia_EXECUTABLE} -E "joinpath(match(r\"(.*)(bin)\",JULIA_HOME).captures[1],\"include\",\"julia\")"
+            OUTPUT_VARIABLE Julia_INCLUDE_DIRS
+            # COMMAND ${Julia_EXECUTABLE} -E "abspath(joinpath(JULIA_HOME, \"../..\", \"src\"))"
+            # OUTPUT_VARIABLE Julia_INCLUDE_DIRS
             RESULT_VARIABLE RESULT
         )
         if(RESULT EQUAL 0)
-            string(REGEX REPLACE "\"" "" Julia_INCLUDE_DIR ${Julia_INCLUDE_DIR})
-            set(Julia_INCLUDE_DIR ${Julia_INCLUDE_DIR}
+            string(REGEX REPLACE "\"" "" Julia_INCLUDE_DIRS ${Julia_INCLUDE_DIRS})
+            set(Julia_INCLUDE_DIRS ${Julia_INCLUDE_DIRS}
                 CACHE PATH "Location of Julia include files")
         endif()
 
@@ -66,7 +68,7 @@ if(NOT Julia_FOUND)
     include(FindPackageHandleStandardArgs)
     find_package_handle_standard_args(
         Julia
-        REQUIRED_VARS   Julia_INCLUDE_DIR Julia_LIBRARY_DIRS Julia_LIBRARIES
+        REQUIRED_VARS   Julia_INCLUDE_DIRS Julia_LIBRARY_DIRS Julia_LIBRARIES
         VERSION_VAR     Julia_VERSION_STRING
         FAIL_MESSAGE    "Julia not found"
     )
