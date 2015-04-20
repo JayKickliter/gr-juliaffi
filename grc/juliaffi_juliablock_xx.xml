@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<block>
+    <name>Julia Code</name>
+    <key>juliaffi_juliablock_xx</key>
+    <category>Julia</category>
+    <import>import juliaffi</import>
+    <make>juliaffi.juliablock_ff($file)</make>
+    <callback>open($file)</callback>
+    <!-- Make one 'param' node for every Parameter you want settable from the GUI.
+       Sub-nodes:
+       * name
+       * key (makes the value accessible as $keyname, e.g. in the make node)
+       * type -->
+    <param>
+        <name>Julia File</name>
+        <key>file</key>
+        <value/>
+        <type>file_open</type>
+    </param>
+    <!-- Make one 'sink' node per input. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
+    <sink>
+        <name>in</name>
+        <type>float</type>
+    </sink>
+    <!-- Make one 'source' node per output. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
+    <source>
+        <name>out</name>
+        <type>float</type>
+    </source>
+</block>
