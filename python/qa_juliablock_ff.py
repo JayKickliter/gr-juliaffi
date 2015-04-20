@@ -52,20 +52,22 @@ class qa_juliablock_ff (gr_unittest.TestCase):
         print result_data
         self.assertFloatTuplesAlmostEqual(expected_result, result_data, 6)
 
-    # def test_002_t (self):
-    #     print 'Testing abs'
-    #     src_data        = (-3, 4, -5.5, 2, 3)
-    #     expected_result = (3, 4, 5.5, 2, 3)
-    #     src             = blocks.vector_source_f(src_data)
-    #     julia_source      = os.path.realpath(os.path.join(os.path.dirname(__file__), '../examples/abs.jl'))
-    #     sqr             = juliaffi.juliablock_ff(julia_source)
-    #     dst             = blocks.vector_sink_f()
-    #     self.tb.connect(src, sqr)
-    #     self.tb.connect(sqr, dst)
-    #     self.tb.run()
-    #     result_data = dst.data()
-    #     print result_data
-    #     self.assertFloatTuplesAlmostEqual(expected_result, result_data, 6)
+    def test_002_t (self):
+        print 'Testing double negate'
+        src_data        = (-3, 4, -5.5, 2, 3)
+        expected_result = (-3, 4, -5.5, 2, 3)
+        src             = blocks.vector_source_f(src_data)
+        julia_source    = os.path.realpath(os.path.join(os.path.dirname(__file__), '../examples/negate.jl'))
+        first_negate    = juliaffi.juliablock_ff(julia_source)
+        second_negate   = juliaffi.juliablock_ff(julia_source)
+        dst             = blocks.vector_sink_f()
+        self.tb.connect(src, first_negate)
+        self.tb.connect(first_negate, second_negate)
+        self.tb.connect(second_negate, dst)
+        self.tb.run()
+        result_data = dst.data()
+        print result_data
+        self.assertFloatTuplesAlmostEqual(expected_result, result_data, 6)
 
 
 if __name__ == '__main__':
