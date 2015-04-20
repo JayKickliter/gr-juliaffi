@@ -46,7 +46,7 @@ namespace gr {
        * class. juliaffi::juliablock_ff::make is the public interface for
        * creating new instances.
        */
-      static sptr make(char *julia_file_path);
+      static sptr make(char *filepath);
     };
 
   } // namespace juliaffi

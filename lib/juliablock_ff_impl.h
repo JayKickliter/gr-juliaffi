@@ -33,7 +33,7 @@ namespace gr {
          jl_function_t *julia_work_function;
 
      public:
-      juliablock_ff_impl(char *julia_file_path);
+      juliablock_ff_impl(char *filepath);
       ~juliablock_ff_impl();
 
       // Where all the action really happens

@@ -30,23 +30,23 @@ namespace gr {
   namespace juliaffi {
 
     juliablock_ff::sptr
-    juliablock_ff::make(char* julia_file_path)
+    juliablock_ff::make(char* filepath)
     {
       return gnuradio::get_initial_sptr
-        (new juliablock_ff_impl(julia_file_path));
+        (new juliablock_ff_impl(filepath));
     }
 
     /*
      * The private constructor
      */
-    juliablock_ff_impl::juliablock_ff_impl(char *julia_file_path)
+    juliablock_ff_impl::juliablock_ff_impl(char *filepath)
       : gr::block("juliablock_ff",
               gr::io_signature::make(1, 1, sizeof(float)),
               gr::io_signature::make(1, 1, sizeof(float)))
     {
         jl_init("/usr/local/bin");
         char *eval_string;
-        sprintf(eval_string, "require(\"%s\")", julia_file_path);
+        sprintf(eval_string, "require(\"%s\")", filepath);
         jl_eval_string(eval_string);
         julia_work_function = jl_get_function(jl_main_module, "work");
 

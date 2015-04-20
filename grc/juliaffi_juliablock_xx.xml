@@ -12,7 +12,7 @@
        * key (makes the value accessible as $keyname, e.g. in the make node)
        * type -->
     <param>
-        <name>Julia File</name>
+        <name>File</name>
         <key>file</key>
         <value/>
         <type>file_open</type>
