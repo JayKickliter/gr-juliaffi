@@ -44,7 +44,7 @@ namespace gr {
               gr::io_signature::make(1, 1, sizeof(float)),
               gr::io_signature::make(1, 1, sizeof(float)))
     {
-        jl_init("/usr/local/bin");
+        jl_init(JULIA_HOME);
         char *eval_string;
         sprintf(eval_string, "require(\"%s\")", filepath);
         jl_eval_string(eval_string);

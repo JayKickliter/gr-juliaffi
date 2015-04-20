@@ -10,8 +10,6 @@ if(NOT JULIA_EXECUTABLE)
 endif()
 
 
-
-
 #
 # Julia version
 #
@@ -26,6 +24,20 @@ if(RESULT EQUAL 0)
 endif()
 
 
+#
+# Julia Home
+#
+execute_process(
+    COMMAND ${JULIA_EXECUTABLE} -E "JULIA_HOME"
+    OUTPUT_VARIABLE JULIA_HOME
+    RESULT_VARIABLE RESULT
+)
+if(RESULT EQUAL 0)
+  # string(REGEX REPLACE "\"" "" JULIA_HOME ${JULIA_HOME})
+  string(STRIP ${JULIA_HOME} JULIA_HOME)
+  set(JULIA_HOME ${JULIA_HOME}
+      CACHE PATH "Julia executable directory")
+endif()
 
 
 #
@@ -34,8 +46,6 @@ endif()
 execute_process(
     COMMAND ${JULIA_EXECUTABLE} -E "joinpath(match(r\"(.*)(bin)\",JULIA_HOME).captures[1],\"include\",\"julia\")"
     OUTPUT_VARIABLE JULIA_INCLUDE_DIRS
-    # COMMAND ${JULIA_EXECUTABLE} -E "abspath(joinpath(JULIA_HOME, \"../..\", \"src\"))"
-    # OUTPUT_VARIABLE JULIA_INCLUDE_DIRS
     RESULT_VARIABLE RESULT
 )
 if(RESULT EQUAL 0)
@@ -43,8 +53,6 @@ if(RESULT EQUAL 0)
     set(JULIA_INCLUDE_DIRS ${JULIA_INCLUDE_DIRS}
         CACHE PATH "Location of Julia include files")
 endif()
-
-
 
 
 #
@@ -68,12 +76,10 @@ find_library( JULIA_LIBRARY
 )
 
 
-
-
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(
     Julia
-    REQUIRED_VARS   JULIA_LIBRARY JULIA_LIBRARY_DIR JULIA_INCLUDE_DIRS
+    REQUIRED_VARS   JULIA_LIBRARY JULIA_LIBRARY_DIR JULIA_INCLUDE_DIRS JULIA_HOME
     VERSION_VAR     JULIA_VERSION_STRING
     FAIL_MESSAGE    "Julia not found"
 )

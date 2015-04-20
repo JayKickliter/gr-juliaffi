@@ -34,7 +34,7 @@ link_directories(
 list(APPEND juliaffi_sources
     juliablock_ff_impl.cc )
 
-add_definitions(-DSYSIMG_JL=${JULIA_SYSIMG})
+add_definitions(-DJULIA_HOME=${JULIA_HOME})
 
 set(juliaffi_sources "${juliaffi_sources}" PARENT_SCOPE)
 if(NOT juliaffi_sources)
