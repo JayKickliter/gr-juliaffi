@@ -35,7 +35,9 @@ namespace gr {
       return gnuradio::get_initial_sptr
         (new juliablock_ff_impl(julia_file_path));
     }
-
+    
+    thread::mutex juliablock_ff_impl::d_mutex;
+    
     /*
      * The private constructor
      */
@@ -44,6 +46,7 @@ namespace gr {
               gr::io_signature::make(1, 1, sizeof(float)),
               gr::io_signature::make(1, 1, sizeof(float)))
     {
+        // thread::scoped_lock guard(d_mutex);
         jl_init("/usr/local/bin");
         char *eval_string;
         sprintf(eval_string, "require(\"%s\")", julia_file_path);
@@ -75,7 +78,8 @@ namespace gr {
     {
         // const float *in = (const float *) input_items[0];
         // float *out      = (float *)       output_items[0];
-
+        thread::scoped_lock guard(d_mutex);
+        
         jl_value_t *array_type = jl_apply_array_type(jl_float32_type, 1);
         jl_array_t *x          = jl_ptr_to_array_1d(array_type, (void *) input_items[0], noutput_items, 0); 
         jl_array_t *y          = jl_ptr_to_array_1d(array_type, (void *) output_items[0], noutput_items, 0);
