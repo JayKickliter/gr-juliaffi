@@ -1,0 +1,2 @@
+TM_MAKE_FILE   = '${CWD}/build/Makefile'
+TM_MAKE_TARGET = 'all'
