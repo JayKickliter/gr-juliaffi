@@ -35,7 +35,9 @@ namespace gr {
       return gnuradio::get_initial_sptr
         (new juliablock_ff_impl(filepath));
     }
-
+    
+    thread::mutex juliablock_ff_impl::d_mutex;
+    
     /*
      * The private constructor
      */
@@ -73,9 +75,8 @@ namespace gr {
                        gr_vector_const_void_star &input_items,
                        gr_vector_void_star &output_items)
     {
-        // const float *in = (const float *) input_items[0];
-        // float *out      = (float *)       output_items[0];
-
+        thread::scoped_lock guard(d_mutex);
+        
         jl_value_t *array_type = jl_apply_array_type(jl_float32_type, 1);
         jl_array_t *x          = jl_ptr_to_array_1d(array_type, (void *) input_items[0], noutput_items, 0); 
         jl_array_t *y          = jl_ptr_to_array_1d(array_type, (void *) output_items[0], noutput_items, 0);

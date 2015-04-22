@@ -69,6 +69,5 @@ class qa_juliablock_ff (gr_unittest.TestCase):
         print result_data
         self.assertFloatTuplesAlmostEqual(expected_result, result_data, 6)
 
-
 if __name__ == '__main__':
     gr_unittest.run(qa_juliablock_ff, "qa_juliablock_ff.xml")

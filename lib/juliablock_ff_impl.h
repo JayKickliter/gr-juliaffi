@@ -31,6 +31,7 @@ namespace gr {
     {
      private:
          jl_function_t *julia_work_function;
+         static thread::mutex d_mutex;
 
      public:
       juliablock_ff_impl(char *filepath);
