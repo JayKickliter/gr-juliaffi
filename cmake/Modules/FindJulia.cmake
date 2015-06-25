@@ -59,7 +59,7 @@ endif()
 # Julia library location
 #
 execute_process(
-    COMMAND ${JULIA_EXECUTABLE} -E "abspath(dirname(Sys.dlpath(\"libjulia\")))"
+    COMMAND ${JULIA_EXECUTABLE} -E "abspath(dirname(Libdl.dlpath(\"libjulia\")))"
     OUTPUT_VARIABLE JULIA_LIBRARY_DIR
     RESULT_VARIABLE RESULT
 )
